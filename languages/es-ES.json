@@ -689,7 +689,7 @@
   "LOCKDOWN_END_FAIL": "No he podido desbloquear {{failcount}} canales, {{failed}}",
   "LOCKDOWN_END_SUCCESS": "Desbloqueados con éxito {{unlockcount}} canales",
   "LOGGING_COMMAND_DESCRIPTION": "Añada registro a su servidor para obtener detalles sobre las acciones enviadas a un canal seleccionado por usted.",
-  "LOGGING_CONFIG_COMMAND_DESCRIPTION": "",
+  "LOGGING_CONFIG_COMMAND_DESCRIPTION": "Seleccione el tipo de acciones que desea que se registren",
   "LOGGING_CONFIG_MESSAGE": "Using the dropdowns below, select the actions you would like logged in each logging category",
   "LOGGING_CONFIG_SUCCESS": "You will now only see logs for the following actions in your {{type}} logs channel:\n{{logs}}",
   "LOGGING_MODLOGS_SELECT_PLACEHOLDER": "Moderation Logs",
