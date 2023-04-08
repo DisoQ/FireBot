@@ -648,7 +648,7 @@
   "LEVELHEAD_TAB": "Tab",
   "LEVELHEAD_CHAT": "Chat",
   "LEVELHEAD_ADDON_LAYERS": "Addon Head Layers",
-  "LINKFILTER_COMMAND_DESCRIPTION": "Filter various kinds of links that may be seen as advertising or self promotion",
+  "LINKFILTER_COMMAND_DESCRIPTION": "Filtrar distintos tipos de enlaces que puedan considerarse publicidad o autopromoción",
   "LINKFILTER_TOGGLE_COMMAND_DESCRIPTION": "Enable and disable link filters.",
   "LINKFILTER_TOGGLE_FILTER_LIST": "Using the dropdown below, select all the filters you would like to enable",
   "LINKFILTER_TOGGLE_PLACEHOLDER": "Select filters",
