@@ -687,7 +687,7 @@
   "LOCKDOWN_END_NONE_LOCKED": "Parece que no hay canales bloqueados por lo que no se puede terminar el bloqueo, ya que nunca se inició",
   "LOCKDOWN_END_REASON": "Bloqueo del servidor finalizado por {{user}} con motivo \"{{reason}}\".",
   "LOCKDOWN_END_FAIL": "No he podido desbloquear {{failcount}} canales, {{failed}}",
-  "LOCKDOWN_END_SUCCESS": "Desbloqueados con éxito {{unlockcount}} canales",
+  "LOCKDOWN_END_SUCCESS": "{{unlockcount}} canales desbloqueados",
   "LOGGING_COMMAND_DESCRIPTION": "Añada registro a su servidor para obtener detalles sobre las acciones enviadas a un canal seleccionado por usted.",
   "LOGGING_CONFIG_COMMAND_DESCRIPTION": "Seleccione el tipo de acciones que desea que se registren",
   "LOGGING_CONFIG_MESSAGE": "Using the dropdowns below, select the actions you would like logged in each logging category",
