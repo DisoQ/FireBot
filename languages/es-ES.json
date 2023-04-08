@@ -678,7 +678,7 @@
   "LINKFILTER_SET": "Se han establecido correctamente los filtros de enlace. Los filtros habilitados actualmente son:\n{enabled}}",
   "LINKFILTER_RESET": "Se han desactivado todos los filtros.",
   "LOCKDOWN_COMMAND_DESCRIPTION": "Bloquear todos los canales en el servidor, útil para detener las raids.",
-  "LOCKDOWN_ACTION_REQUIRED": "Debe indicar una acción. Las acciones posibles son "start", "end" o "exclude".",
+  "LOCKDOWN_ACTION_REQUIRED": "Debe indicar una acción. Las acciones posibles son `start`, `end` o `exclude`.",
   "LOCKDOWN_EXCLUDE_REQUIRED": "Debe excluir al menos una categoría del bloqueo del servidor antes de poder iniciar/finalizar el bloqueo.",
   "LOCKDOWN_EXCLUDE_SUCCESS": "Successfully excluded channel",
   "LOCKDOWN_REASON": "Server lockdown started by {{user}} with reason \"{{reason}}\".",
