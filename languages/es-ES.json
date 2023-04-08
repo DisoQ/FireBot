@@ -663,7 +663,7 @@
   "LINKFILTER_EXCLUDE_ROLE_NOT_GUILD": "Sólo se pueden excluir roles del servidor actual",
   "LINKFILTER_EXCLUDE_THREAD": "No se pueden excluir los hilos de los filtros de enlaces. Si un canal está excluido, todos los hilos de ese canal también lo estarán.",
   "LINKFILTER_EXCLUDE_AND_UNEXCLUDE": "Excluido con éxito {{excluded}} de los filtros de enlaces y eliminado {{unexcluded}} de la lista",
-  "LINKFILTER_EXCLUDE_SUCCESS": "Successfully excluded {{excluded}} from link filters",
+  "LINKFILTER_EXCLUDE_SUCCESS": "Excluido con éxito {{excluded}} de los filtros de enlaces",
   "LINKFILTER_UNEXCLUDE_SUCCESS": "Successfully removed {{unexcluded}} from the exclusion list",
   "LINKFILTER_EXCLUDE_NO_CHANGE": "No changes were made as you didn't provide any valid entities to exclude or remove from exclusions",
   "LINKFILTER_LIST_EXCLUDE_COMMAND_DESCRIPTION": "List items excluded from link filters",
