@@ -816,7 +816,7 @@
   "PUBLIC_ENABLED_LOG": "Este servidor ha sido configurado como público por {{user}} y aparecerá en la lista de servidores públicos de Fire.",
   "PUBLIC_DISABLED": "Su servidor ya no es público y no aparecerá en el sitio web de Fire",
   "PUBLIC_DISABLED_LOG": "Este servidor fue eliminado manualmente de la lista de servidores públicos de Fire por {{user}}",
-  "PUBLIC_DISCOVERABLE_INVITE": "Crear una invitación para utilizarla en la página de servidores públicos de Fire, ya que este servidor tiene la función \"DISCOVERABLE\",
+  "PUBLIC_DISCOVERABLE_INVITE": "Crear una invitación para utilizarla en la página de servidores públicos de Fire, ya que este servidor tiene la función DISCOVERABLE",
   "BLACKLIST_COMMAND_DESCRIPTION": "Hacer que un usuario no pueda usar a Fire en tu servidor",
   "BLACKLIST_BOT": "De todas formas, los bots no pueden usar a Fire, ¡no hace falta ponerlos en la lista negra!",
   "BLACKLIST_FORBIDDEN": "Debes estar en un servidor y tener el permiso **{{manage}}** para usar esto.",
