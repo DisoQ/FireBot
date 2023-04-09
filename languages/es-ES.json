@@ -710,7 +710,7 @@
   "LOGIGNORE_COMMAND_DESCRIPTION": "Ignorar canales específicos de los registros",
   "LOGIGNORE_LIST_NONE": "Actualmente no se ignora el registro de ningún canal",
   "LOGIGNORE_LIST_CURRENT": "Los canales actualmente ignorados son los siguientes\n\n{{channels}}",
-  "MAKEAMEME_COMMAND_DESCRIPTION": "Crea tu propio meme utilizando el formato "texto arriba texto abajo".",
+  "MAKEAMEME_COMMAND_DESCRIPTION": "Crea tu propio meme utilizando el formato \"texto arriba texto abajo\".",
   "MAKEAMEME_ARGUMENTS_IMAGE_DESCRIPTION": "La imagen a utilizar para el meme",
   "MAKEAMEME_ARGUMENTS_TOP_DESCRIPTION": "The top text of the meme",
   "MAKEAMEME_ARGUMENTS_BOTTOM_DESCRIPTION": "The bottom text of the meme",
