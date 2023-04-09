@@ -716,7 +716,7 @@
   "MAKEAMEME_ARGUMENTS_BOTTOM_DESCRIPTION": "El texto inferior del meme",
   "MAKEAMEME_NO_IMAGE": "Necesitas proporcionar una imagen para hacer un meme",
   "MAKEAMEME_NO_TEXT": "Debe proporcionar el texto separado por **|**",
-  "MAKEAMEME_TOO_LARGE": "The meme is too spicy for me to upload",
+  "MAKEAMEME_TOO_LARGE": "El meme es demasiado picante para que lo suba",
   "MAKEAMEME_UPLOAD_FAIL": "Failed to upload spicy meme :(",
   "MEMBERJOIN_LOG_AUTHOR": "Member Join | {{member}}",
   "MEMBERJOIN_LOG_PREMIUM_UPSELL_TITLE": "Want to see what invite they used?",
