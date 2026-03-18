@@ -593,6 +593,7 @@ export default class MCLogs extends Module {
         possibleCulprits.push(
           language.get(`MC_LOG_POTENTIAL_CULPRIT_${blame.reason}`, {
             name: blame.modName ?? blame.modId,
+            mcVersion: mclogsRes.client.mcVersion,
           })
         );
     }
