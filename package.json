@@ -49,6 +49,7 @@
     "p-event": "^7.1.0",
     "pidusage": "^4.0.1",
     "prettier": "^3.8.1",
+    "remove-markdown": "^0.6.3",
     "semaphore-async-await": "^1.5.1",
     "semver": "^7.7.3",
     "tinycolor2": "^1.6.0",

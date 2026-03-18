@@ -46,6 +46,7 @@ import {
   TextInputStyles,
 } from "discord.js/typings/enums";
 import { TOptions } from "i18next";
+import removeMarkdown = require("remove-markdown");
 
 export type AppealStatus =
   | "not_appealed"
@@ -146,6 +147,12 @@ export type AppealContainerData = {
     moderator: FireUser;
   };
 };
+
+const removeMarkdownForModal = (text: string) =>
+  removeMarkdown(text, {
+    useImgAltText: false, // this is required for some reason
+    separateLinksAndTexts: " - ",
+  });
 
 export default class Appeals extends Command {
   constructor() {
@@ -596,7 +603,7 @@ export default class Appeals extends Command {
           modal.addComponents(
             new LabelComponent()
               .setLabel(item.label)
-              .setDescription(item.description)
+              .setDescription(removeMarkdownForModal(item.description))
               .setComponent(
                 new StringSelectMenu()
                   .setCustomId(index.toString())
@@ -621,7 +628,7 @@ export default class Appeals extends Command {
           modal.addComponents(
             new LabelComponent()
               .setLabel(item.label)
-              .setDescription(item.description)
+              .setDescription(removeMarkdownForModal(item.description))
               .setComponent(
                 new TextInputComponent()
                   .setCustomId(index.toString())
@@ -636,7 +643,7 @@ export default class Appeals extends Command {
           modal.addComponents(
             new LabelComponent()
               .setLabel(item.label)
-              .setDescription(item.description)
+              .setDescription(removeMarkdownForModal(item.description))
               .setComponent(
                 new FileUploadComponent()
                   .setCustomId(index.toString())
@@ -651,7 +658,7 @@ export default class Appeals extends Command {
           modal.addComponents(
             new LabelComponent()
               .setLabel(item.label)
-              .setDescription(item.description)
+              .setDescription(removeMarkdownForModal(item.description))
               .setComponent(
                 new CheckboxComponent()
                   .setCustomId(index.toString())
@@ -664,7 +671,7 @@ export default class Appeals extends Command {
           modal.addComponents(
             new LabelComponent()
               .setLabel(item.label)
-              .setDescription(item.description)
+              .setDescription(removeMarkdownForModal(item.description))
               .setComponent(
                 new CheckboxGroupComponent()
                   .setCustomId(index.toString())
@@ -695,7 +702,7 @@ export default class Appeals extends Command {
           modal.addComponents(
             new LabelComponent()
               .setLabel(item.label)
-              .setDescription(item.description)
+              .setDescription(removeMarkdownForModal(item.description))
               .setComponent(
                 new RadioGroupComponent()
                   .setCustomId(index.toString())
@@ -736,7 +743,7 @@ export default class Appeals extends Command {
             .setCustomId("label")
             .setRequired(true)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(100)
+            .setMaxLength(45)
             .setValue(existing ? existing.label : undefined)
         ),
       new LabelComponent()
@@ -752,7 +759,7 @@ export default class Appeals extends Command {
             .setCustomId("description")
             .setRequired(false)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(250)
+            .setMaxLength(100)
             .setValue(existing ? existing.description : undefined)
         ),
       new LabelComponent()
@@ -809,14 +816,14 @@ export default class Appeals extends Command {
         .setId(1)
         .setLabel(language.get("LABEL"))
         .setDescription(
-          language.get("APPEALS_CONFIG_UPDATE_TEXT_INPUT_LABEL_DESCRTIPTION")
+          language.get("APPEALS_CONFIG_UPDATE_TEXT_INPUT_LABEL_DESCRIPTION")
         )
         .setComponent(
           new TextInputComponent()
             .setCustomId("label")
             .setRequired(true)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(100)
+            .setMaxLength(45)
             .setValue(existing ? existing.label : undefined)
         ),
       new LabelComponent()
@@ -832,7 +839,7 @@ export default class Appeals extends Command {
             .setCustomId("description")
             .setRequired(false)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(250)
+            .setMaxLength(100)
             .setValue(existing ? existing.description : undefined)
         ),
       new LabelComponent()
@@ -919,14 +926,14 @@ export default class Appeals extends Command {
         .setId(1)
         .setLabel(language.get("LABEL"))
         .setDescription(
-          language.get("APPEALS_CONFIG_UPDATE_FILE_UPLOAD_LABEL_DESCRTIPTION")
+          language.get("APPEALS_CONFIG_UPDATE_FILE_UPLOAD_LABEL_DESCRIPTION")
         )
         .setComponent(
           new TextInputComponent()
             .setCustomId("label")
             .setRequired(true)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(100)
+            .setMaxLength(45)
             .setValue(existing ? existing.label : undefined)
         ),
       new LabelComponent()
@@ -942,7 +949,7 @@ export default class Appeals extends Command {
             .setCustomId("description")
             .setRequired(false)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(250)
+            .setMaxLength(100)
             .setValue(existing ? existing.description : undefined)
         ),
       new LabelComponent()
@@ -1036,7 +1043,7 @@ export default class Appeals extends Command {
             .setCustomId("label")
             .setRequired(true)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(100)
+            .setMaxLength(45)
             .setValue(existing ? existing.label : undefined)
         ),
       new LabelComponent()
@@ -1050,7 +1057,7 @@ export default class Appeals extends Command {
             .setCustomId("description")
             .setRequired(false)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(250)
+            .setMaxLength(100)
             .setValue(existing ? existing.description : undefined)
         ),
       new LabelComponent()
@@ -1096,7 +1103,7 @@ export default class Appeals extends Command {
             .setCustomId("label")
             .setRequired(true)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(100)
+            .setMaxLength(45)
             .setValue(existing ? existing.label : undefined)
         ),
       new LabelComponent()
@@ -1112,7 +1119,7 @@ export default class Appeals extends Command {
             .setCustomId("description")
             .setRequired(false)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(250)
+            .setMaxLength(100)
             .setValue(existing ? existing.description : undefined)
         ),
       new LabelComponent()
@@ -1208,7 +1215,7 @@ export default class Appeals extends Command {
             .setCustomId("label")
             .setRequired(true)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(100)
+            .setMaxLength(45)
             .setValue(existing ? existing.label : undefined)
         ),
       new LabelComponent()
@@ -1224,7 +1231,7 @@ export default class Appeals extends Command {
             .setCustomId("description")
             .setRequired(false)
             .setStyle(TextInputStyles.SHORT)
-            .setMaxLength(250)
+            .setMaxLength(100)
             .setValue(existing ? existing.description : undefined)
         ),
       new LabelComponent()

@@ -74,6 +74,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
+      remove-markdown:
+        specifier: ^0.6.3
+        version: 0.6.3
       semaphore-async-await:
         specifier: ^1.5.1
         version: 1.5.1
@@ -717,6 +720,9 @@ packages:
 
   remove-accents@0.4.4:
     resolution: {integrity: sha512-EpFcOa/ISetVHEXqu+VwI96KZBmq+a8LJnGkaeFw45epGlxIZz5dhEEnNZMsQXgORu3qaMoLX4qJCzOik6ytAg==}
+
+  remove-markdown@0.6.3:
+    resolution: {integrity: sha512-Qvp2p0Q1irE7AaJO7QemJe04HdObHylJrG+q4hszvPlYp7q4EvfINpEIaIEFdB+3XTDp1h6fiyT60ae00gmRow==}
 
   require-in-the-middle@8.0.1:
     resolution: {integrity: sha512-QT7FVMXfWOYFbeRBF6nu+I6tr2Tf3u0q8RIEjNob/heKY/nh7drD/k7eeMFmSQgnTtCzLDcCu/XEnpW2wk4xCQ==}
@@ -1479,6 +1485,8 @@ snapshots:
   prettier@3.8.1: {}
 
   remove-accents@0.4.4: {}
+
+  remove-markdown@0.6.3: {}
 
   require-in-the-middle@8.0.1:
     dependencies:
