@@ -390,7 +390,7 @@ export class ModalMessage {
   }
 
   hasExperiment(id: string) {
-    return this.guild.hasExperiment(id) || this.author.hasExperiment(id);
+    return this.guild?.hasExperiment(id) || this.author.hasExperiment(id);
   }
 }
 

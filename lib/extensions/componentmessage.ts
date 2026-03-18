@@ -383,7 +383,7 @@ export class ComponentMessage {
 
   hasExperiment(id: string, projectName?: string) {
     return (
-      this.guild.hasExperiment(id, projectName) ||
+      this.guild?.hasExperiment(id, projectName) ||
       this.author.hasExperiment(id, projectName)
     );
   }
