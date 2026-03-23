@@ -58,7 +58,9 @@ export default class VanityURLs extends Module {
   }
 
   async getVanity(code: string) {
-    const vanityReq = await centra(`${this.vanityDomain}/api/${code}`)
+    const vanityReq = await centra(
+      `${this.client.manager.REST_HOST}/inv.wtf/api/${code}`
+    )
       .header("User-Agent", this.client.manager.ua)
       .header("Authorization", process.env.WS_AUTH)
       .send();

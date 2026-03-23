@@ -32,7 +32,9 @@ export default class Redirects extends Module {
   }
 
   async getRedirect(code: string) {
-    const redirectReq = await centra(`${this.redirectDomain}/api/${code}`)
+    const redirectReq = await centra(
+      `${this.client.manager.REST_HOST}/inv.wtf/api/${code}`
+    )
       .header("User-Agent", this.client.manager.ua)
       .header("Authorization", process.env.WS_AUTH)
       .send();
