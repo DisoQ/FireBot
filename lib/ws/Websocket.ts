@@ -26,7 +26,7 @@ export class Websocket extends Client {
       process.env.WS_HOST
         ? `${process.env.WS_SCHEME ?? "wss"}://${process.env.WS_HOST}`
         : `ws://127.0.0.1:${process.env.WS_PORT}`,
-      { headers }
+      { headers, handshakeTimeout: 1000 }
     );
     this.handlers = new Collection();
     this.manager = manager;
