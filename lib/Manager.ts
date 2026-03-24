@@ -136,6 +136,7 @@ export class Manager {
     while (true) {
       const healthReq = await centra(`${this.REST_HOST}/v2/health`)
         .header("User-Agent", this.ua)
+        .timeout(1000)
         .send()
         .catch(() => {});
       if (
