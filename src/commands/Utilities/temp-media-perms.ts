@@ -3,6 +3,7 @@ import { FireMember } from "@fire/lib/extensions/guildmember";
 import { Command } from "@fire/lib/util/command";
 import { Language } from "@fire/lib/util/language";
 import { PermissionFlagsBits } from "discord-api-types/v9";
+import { Formatters } from "discord.js";
 
 export default class TempMediaPerms extends Command {
   constructor() {
@@ -23,6 +24,7 @@ export default class TempMediaPerms extends Command {
       enableSlashCommand: true,
       restrictTo: "guild",
       moderatorOnly: true,
+      deferAnyways: true,
       slashOnly: true,
       ephemeral: true,
     });
@@ -49,7 +51,8 @@ export default class TempMediaPerms extends Command {
       )
       .catch(() => {});
     if (!added) return await command.error("COMMAND_ERROR_500");
-    else
+    else {
+      const timestamp = +new Date() + 120_000;
       setTimeout(() => {
         args.user.roles.remove(
           role,
@@ -58,5 +61,10 @@ export default class TempMediaPerms extends Command {
           })
         );
       }, 120_000);
+      return await command.success("TEMP_MEDIA_PERMS_SUCCESS", {
+        user: args.user.toString(),
+        time: Formatters.time(new Date(timestamp), "R"),
+      });
+    }
   }
 }

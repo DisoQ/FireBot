@@ -1872,6 +1872,7 @@
   "TEMP_MEDIA_PERMS_MISSING_USER": "you forgot to provide a user ya doofus",
   "TEMP_MEDIA_PERMS_ALREADY_HAS": "that user already has permission to attach files & embed links",
   "TEMP_MEDIA_PERMS_REASON": "Given temporary media permissions by {{author}}",
+  "TEMP_MEDIA_PERMS_SUCCESS": "Successfully gave temporary media permissions to {{user}} and they'll be removed {{time}} (approximately)",
   "THREADMEMBERUPDATELOG_AUTHOR": "Thread Members Update | {{thread}}",
   "TICKET_COMMAND_DESCRIPTION": "Manage ticket configuration in the server",
   "TICKET_MAIN_DESCRIPTION": "Here are all the ticket configuration commands",
