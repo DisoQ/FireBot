@@ -2697,7 +2697,6 @@ Please choose accurately as it will allow us to help you as quick as possible! â
         Snowflake,
         `${number}`,
       ];
-      this.console.debug({ userId, timestampString });
       if (button.author.id != userId) return;
 
       const timestamp = +timestampString;
