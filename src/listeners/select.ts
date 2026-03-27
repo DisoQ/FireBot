@@ -348,7 +348,7 @@ export default class Select extends Listener {
           return await specifyTimeModal.error("REMINDER_SNOOZE_TIME_INVALID");
         select.values = [timestamp.toString()];
       }
-      let created: { [duration: string]: boolean } = {};
+      let created: { [duration: string]: boolean | "ALREADY_EXISTS" } = {};
       for (const value of select.values) {
         const timestamp = +value;
         if (isNaN(timestamp)) {
@@ -365,10 +365,10 @@ export default class Select extends Listener {
         created[Formatters.time(date, "R")] = remind;
       }
       const success = Object.entries(created)
-        .filter(([, success]) => success)
+        .filter(([, success]) => success == true)
         .map(([duration]) => duration);
       const failed = Object.entries(created)
-        .filter(([, success]) => !success)
+        .filter(([, success]) => success != true)
         .map(([duration]) => duration);
       if (failed.length != select.values.length) {
         await originalMessage
@@ -410,7 +410,7 @@ export default class Select extends Listener {
         });
       } else
         return await (specifyTimeModal ?? select).error(
-          "ERROR_CONTACT_SUPPORT"
+          "REMINDER_CREATION_FAILED"
         );
     }
 

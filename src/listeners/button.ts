@@ -2691,9 +2691,42 @@ Please choose accurately as it will allow us to help you as quick as possible! â
             )
           )
       );
-    }
+    } else if (button.customId.startsWith("reminders-append:")) {
+      const [, userId, timestampString] = button.customId.split(":") as [
+        string,
+        Snowflake,
+        `${number}`,
+      ];
+      this.console.debug({ userId, timestampString });
+      if (button.author.id != userId) return;
 
-    if (button.customId.startsWith("reminders-delete:")) {
+      const timestamp = +timestampString;
+      const date = new Date(timestamp);
+
+      const display = button.message.components
+        .filter((component) => component instanceof TextDisplayComponent)
+        .at(-1);
+      const updated = await this.client.db
+        .query("UPDATE remind SET reminder=$1 WHERE uid=$2 AND forwhen=$3;", [
+          display.content,
+          button.author.id,
+          date,
+        ])
+        .catch(() => {});
+      if (!updated || updated.status != "UPDATE 1")
+        return await button.error("REMINDERS_EDIT_FAILED");
+      else
+        return await button.channel.update({
+          components: [
+            new TextDisplayComponent({
+              content: button.language.getSuccess("REMINDERS_EDIT_SUCCESS", {
+                time: Formatters.time(date, "R"),
+                text: display.content,
+              }),
+            }),
+          ],
+        });
+    } else if (button.customId.startsWith("reminders-delete:")) {
       const [, userId, timestamp] = button.customId.split(":") as [
         string,
         Snowflake,
@@ -2702,7 +2735,7 @@ Please choose accurately as it will allow us to help you as quick as possible! â
       if (button.author.id != userId) return;
 
       // all reminder related responses are ephemeral
-      // sp we update the flags here so the responses
+      // so we update the flags here so the responses
       // from RemindersDelete#actuallyRun are also ephemeral
       button.flags = 64;
 

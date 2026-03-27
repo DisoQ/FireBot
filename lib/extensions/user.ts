@@ -155,7 +155,7 @@ export class FireUser extends User {
       }>("SELECT uid FROM remind WHERE uid=$1 AND forwhen=$2;", [this.id, when])
       .first()
       .catch(() => {});
-    if (existing && existing.uid == this.id) return false;
+    if (existing && existing.uid == this.id) return "ALREADY_EXISTS";
 
     const reminder = await this.client.db
       .query(

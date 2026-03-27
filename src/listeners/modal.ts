@@ -24,6 +24,7 @@ import {
   MessageActionRow,
   MessageEmbed,
   MessageSelectMenu,
+  TextDisplayComponent,
   ThreadChannel,
 } from "discord.js";
 import {
@@ -214,7 +215,10 @@ export default class Modal extends Listener {
 
       const updated = await this.client.db.query(query, values).catch(() => {});
       if (!updated) return await modal.error("REMINDERS_EDIT_FAILED");
-      else if (updated.status.startsWith("UPDATE ")) {
+      else if (
+        updated.status.startsWith("UPDATE ") &&
+        modal.message.components?.[0] instanceof MessageActionRow
+      ) {
         // we need to update the components in the og message
         // so they can be reused, rather than needing to run list again
         const dropdown = (modal.message.components[0] as MessageActionRow)
@@ -280,7 +284,22 @@ export default class Modal extends Listener {
           // while remaining under the 2000 char limit
           text: this.client.util.shortenText(modalValues.text, 1850),
         });
-      }
+      } else if (
+        updated.status.startsWith("UPDATE ") &&
+        modal.message.flags.has("IS_COMPONENTS_V2")
+      )
+        return await modal.message.edit({
+          components: [
+            new TextDisplayComponent({
+              content: modal.language.getSuccess("REMINDERS_EDIT_SUCCESS", {
+                time: Formatters.time(modalValues.time, "R"),
+                // 1850 chars should be enough to not clash with the rest of the content
+                // while remaining under the 2000 char limit
+                text: this.client.util.shortenText(modalValues.text, 1850),
+              }),
+            }),
+          ],
+        });
     }
 
     if (modal.customId == "mclogscan:toggle") {

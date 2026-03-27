@@ -14,7 +14,9 @@ import {
   MessageActionRow,
   MessageButton,
   MessageSelectMenu,
+  TextDisplayComponent,
 } from "discord.js";
+import { MessageButtonStyles } from "discord.js/typings/enums";
 
 const { regexes } = constants;
 
@@ -486,7 +488,7 @@ export default class RemindersCreate extends Command {
       });
 
     // actually start setting the reminder
-    let created: { [duration: string]: boolean } = {};
+    let created: { [duration: string]: boolean | "ALREADY_EXISTS" } = {};
     let latestTime = +reminder.date;
     for (let i = 0; i < repeat; i++) {
       const current = new Date(latestTime);
@@ -496,28 +498,85 @@ export default class RemindersCreate extends Command {
         reminder.text,
         command.url
       );
-      created[Formatters.time(current, "R")] = remind;
+      created[latestTime.toString()] = remind;
       latestTime += parsedStepDiff;
     }
     const success = Object.entries(created)
-      .filter(([, success]) => success)
-      .map(([duration]) => duration);
+      .filter(([, success]) => success == true)
+      .map(([duration]) => +duration);
     const failed = Object.entries(created)
-      .filter(([, success]) => !success)
-      .map(([duration]) => duration);
-    return failed.length != repeat
-      ? await command.success(
-          success.length == 1
-            ? "REMINDER_CREATED_SINGLE"
-            : "REMINDER_CREATED_MULTI",
-          {
-            time: success[0],
-            times: success.map((s) => "- " + s).join("\n"),
-            includeSlashUpsell: true,
-          }
-        )
-      : await command.error("REMINDER_CREATION_FAILED", {
+      .filter(([, success]) => success != true)
+      .map(([duration]) => +duration);
+    if (failed.length != repeat)
+      return await command.success(
+        success.length == 1
+          ? "REMINDER_CREATED_SINGLE"
+          : "REMINDER_CREATED_MULTI",
+        {
+          time: Formatters.time(new Date(success[0]), "R"),
+          times: success
+            .map((s) => "- " + Formatters.time(new Date(s), "R"))
+            .join("\n"),
+          includeSlashUpsell: true,
+        }
+      );
+    else {
+      if (failed.length > 1)
+        return await command.error("REMINDER_CREATION_FAILED", {
           includeSlashUpsell: true,
         });
+      else if (created[failed.at(0)] == "ALREADY_EXISTS") {
+        const timestamp = failed.at(0);
+        const date = new Date(timestamp);
+
+        const existing = await this.client.db
+          .query<{
+            reminder: string;
+          }>("SELECT reminder FROM remind WHERE uid=$1 AND forwhen=$2", [
+            command.author.id,
+            date,
+          ])
+          .first()
+          .catch(() => {});
+        if (!existing)
+          return await command.error("REMINDER_CREATION_FAILED", {
+            includeSlashUpsell: true,
+          });
+        const text = existing.reminder + `\n${reminder.text}`;
+
+        const appendButton = new MessageButton()
+            .setCustomId(`!reminders-append:${command.author.id}:${timestamp}`)
+            .setStyle(MessageButtonStyles.PRIMARY)
+            .setLabel(
+              command.language.get("REMINDER_CREATION_APPEND_BUTTON_LABEL")
+            ),
+          editButton = new MessageButton()
+            .setCustomId(`!reminders-edit:${command.author.id}:${timestamp}`)
+            .setStyle(MessageButtonStyles.SECONDARY)
+            .setLabel(
+              command.language.get("REMINDER_CREATION_EDIT_BUTTON_LABEL")
+            );
+
+        const row = new MessageActionRow();
+        if (text.length <= 4000) row.addComponents(appendButton);
+        row.addComponents(editButton);
+
+        const error = new TextDisplayComponent({
+          content: command.language.getError(
+            "REMINDER_CREATION_FAIL_ALREADY_EXISTS"
+          ),
+        });
+        const display = new TextDisplayComponent({
+          content: this.client.util.shortenText(text, 4000),
+        });
+
+        return await command.channel.send({
+          components: [error, display, row],
+        });
+      } else
+        return await command.error("REMINDER_CREATION_FAILED", {
+          includeSlashUpsell: true,
+        });
+    }
   }
 }
