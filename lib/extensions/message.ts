@@ -711,7 +711,14 @@ export class FireMessage extends Message {
           : null;
       if (hooks && !hook)
         hook = hooks
-          ?.filter((hook) => !!hook.token && hook.channelId == destination.id)
+          ?.filter(
+            (hook) =>
+              !!hook.token &&
+              hook.channelId == destination.id &&
+              (this.hasInteractiveComponents()
+                ? hook.owner.id == this.client.user.id
+                : true)
+          )
           ?.first();
       if (!hook && typeof destination.createWebhook == "function") {
         hook = await destination
