@@ -8,6 +8,9 @@ import { FireUser } from "@fire/lib/extensions/user";
 import { constants, titleCase } from "@fire/lib/util/constants";
 import { GuildTagManager } from "@fire/lib/util/guildtagmanager";
 import { Listener } from "@fire/lib/util/listener";
+import { Message } from "@fire/lib/ws/Message";
+import { MessageUtil } from "@fire/lib/ws/util/MessageUtil";
+import { EventType } from "@fire/lib/ws/util/constants";
 import * as centra from "centra";
 import { Snowflake } from "discord-api-types/globals";
 import { PermissionFlagsBits } from "discord-api-types/v9";
@@ -2706,15 +2709,38 @@ Please choose accurately as it will allow us to help you as quick as possible! â
         .filter((component) => component instanceof TextDisplayComponent)
         .at(-1);
       const updated = await this.client.db
-        .query("UPDATE remind SET reminder=$1 WHERE uid=$2 AND forwhen=$3;", [
-          display.content,
-          button.author.id,
-          date,
-        ])
+        .query<{
+          link: string;
+        }>(
+          "UPDATE remind SET reminder=$1 WHERE uid=$2 AND forwhen=$3 RETURNING link;",
+          [display.content, button.author.id, date]
+        )
         .catch(() => {});
       if (!updated || updated.status != "UPDATE 1")
         return await button.error("REMINDERS_EDIT_FAILED");
-      else
+      else {
+        // We first send a delete with the original timestamp (or same if unchanged)
+        this.client.manager?.ws.send(
+          MessageUtil.encode(
+            new Message(EventType.REMINDER_DELETE, {
+              user: userId,
+              timestamp,
+            })
+          )
+        );
+
+        // and then we send a create with the new data
+        this.client.manager?.ws.send(
+          MessageUtil.encode(
+            new Message(EventType.REMINDER_CREATE, {
+              user: userId,
+              text: display.content,
+              link: updated.rows?.[0]?.[0] ?? button.message.url,
+              timestamp,
+            })
+          )
+        );
+
         return await button.channel.update({
           components: [
             new TextDisplayComponent({
@@ -2725,6 +2751,7 @@ Please choose accurately as it will allow us to help you as quick as possible! â
             }),
           ],
         });
+      }
     } else if (button.customId.startsWith("reminders-delete:")) {
       const [, userId, timestamp] = button.customId.split(":") as [
         string,
