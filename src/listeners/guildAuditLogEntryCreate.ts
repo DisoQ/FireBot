@@ -575,7 +575,10 @@ export default class GuildAuditLogEntryCreate extends Listener {
     const executor = (await guild.members.fetch(
       auditLogEntry.executorId
     )) as FireMember;
-    let target = guild.channels.cache.get(auditLogEntry.targetId);
+    const target =
+      guild.channels.cache.get(auditLogEntry.targetId) ??
+      // apparently this is necessary (FIRE-DP4)
+      (await guild.channels.fetch(auditLogEntry.targetId));
 
     const embed = new MessageEmbed()
       .setColor("#2ECC71")
