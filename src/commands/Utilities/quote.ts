@@ -161,7 +161,7 @@ export default class Quote extends Command {
     );
     this.console.log("Forwarding cross-cluster quote", {
       user: `${message.author} (${message.author.id})`,
-      guild: `${message.guild} (${message.guild.id})`,
+      guild: message.guild ? `${message.guild} (${message.guild.id})` : "N/A",
       source: `${quote.guild_id}/${quote.channel_id}/${quote.message_id}`,
       destination: `${message.guild.id}/${
         "parent" in message.channel
