@@ -5,6 +5,8 @@ import { Language } from "@fire/lib/util/language";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import { Formatters } from "discord.js";
 
+const TEMP_MEDIA_TIME = 15 * 60 * 1000; // 15 minutes
+
 export default class TempMediaPerms extends Command {
   constructor() {
     super("temp-media-perms", {
@@ -52,7 +54,7 @@ export default class TempMediaPerms extends Command {
       .catch(() => {});
     if (!added) return await command.error("COMMAND_ERROR_500");
     else {
-      const timestamp = +new Date() + 120_000;
+      const timestamp = +new Date() + TEMP_MEDIA_TIME;
       setTimeout(() => {
         args.user.roles.remove(
           role,
@@ -60,7 +62,7 @@ export default class TempMediaPerms extends Command {
             author: `${command.author} (${command.author.id})`,
           })
         );
-      }, 120_000);
+      }, TEMP_MEDIA_TIME);
       return await command.success("TEMP_MEDIA_PERMS_SUCCESS", {
         user: args.user.toString(),
         time: Formatters.time(new Date(timestamp), "R"),
