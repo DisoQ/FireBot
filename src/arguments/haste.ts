@@ -1,6 +1,6 @@
 import { FireMessage } from "@fire/lib/extensions/message";
 import { constants } from "@fire/lib/util/constants";
-import * as centra from "centra";
+import centra from "centra";
 import { ArgumentTypeCaster } from "discord-akairo";
 
 const {

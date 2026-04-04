@@ -6,7 +6,7 @@ import { FireUser } from "@fire/lib/extensions/user";
 import { Command } from "@fire/lib/util/command";
 import { constants } from "@fire/lib/util/constants";
 import { Language, LanguageKeys } from "@fire/lib/util/language";
-import * as centra from "centra";
+import centra from "centra";
 import { Snowflake } from "discord-api-types/globals";
 import {
   APICheckboxGroupOption,

@@ -6,7 +6,7 @@ import { Language } from "@fire/lib/util/language";
 import { Message } from "@fire/lib/ws/Message";
 import { EventType } from "@fire/lib/ws/util/constants";
 import { MessageUtil } from "@fire/lib/ws/util/MessageUtil";
-import * as centra from "centra";
+import centra from "centra";
 import {
   PermissionFlagsBits,
   RESTPatchAPIGuildMemberResult,

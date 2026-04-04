@@ -1,5 +1,5 @@
-import * as Sentry from "@sentry/node";
-import * as centra from "centra";
+import Sentry from "@sentry/node";
+import centra from "centra";
 import { Collection, version as djsver, SnowflakeUtil } from "discord.js";
 import { isDeepStrictEqual } from "util";
 import { Fire } from "./Fire";

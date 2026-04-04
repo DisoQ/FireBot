@@ -2,7 +2,7 @@ import { ApplicationCommandMessage } from "@fire/lib/extensions/appcommandmessag
 import { Command } from "@fire/lib/util/command";
 import { Language } from "@fire/lib/util/language";
 import Redirects from "@fire/src/modules/redirects";
-import * as centra from "centra";
+import centra from "centra";
 
 const validityRegex = /^[a-zA-Z0-9]{2,25}$/gim;
 

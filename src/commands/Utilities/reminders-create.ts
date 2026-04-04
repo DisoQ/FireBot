@@ -6,7 +6,7 @@ import { classicRemind, constants } from "@fire/lib/util/constants";
 import { Language } from "@fire/lib/util/language";
 import { ParsedTime, parseWithUserTimezone } from "@fire/src/arguments/time";
 import { ParsedResult, strict } from "chrono-node";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import { Snowflake } from "discord-api-types/globals";
 import {
   Collection,

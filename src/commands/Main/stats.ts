@@ -3,7 +3,7 @@ import { ClusterStats } from "@fire/lib/interfaces/stats";
 import { humanFileSize } from "@fire/lib/util/clientutil";
 import { Command } from "@fire/lib/util/command";
 import { Language } from "@fire/lib/util/language";
-import * as centra from "centra";
+import centra from "centra";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import { Formatters, MessageEmbed, version as djsver } from "discord.js";
 import { totalmem } from "os";

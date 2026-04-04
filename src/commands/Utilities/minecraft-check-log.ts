@@ -4,7 +4,7 @@ import { Command } from "@fire/lib/util/command";
 import { constants } from "@fire/lib/util/constants";
 import { Language } from "@fire/lib/util/language";
 import MCLogs, { MCLogsResponse } from "@fire/src/modules/mclogs";
-import * as centra from "centra";
+import centra from "centra";
 import { MessageAttachment } from "discord.js";
 
 export default class CheckLog extends Command {

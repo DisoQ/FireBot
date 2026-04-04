@@ -1,11 +1,11 @@
-import * as dotEnvExtended from "dotenv-extended";
+import dotEnvExtended from "dotenv-extended";
 import "module-alias/register";
 
-import * as dayjs from "dayjs";
-import * as calendar from "dayjs/plugin/calendar";
-import * as relativeTime from "dayjs/plugin/relativeTime";
-import * as timezone from "dayjs/plugin/timezone";
-import * as utc from "dayjs/plugin/utc";
+import dayjs from "dayjs";
+import calendar from "dayjs/plugin/calendar";
+import relativeTime from "dayjs/plugin/relativeTime";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -32,7 +32,7 @@ if (process.env.POD_NAME)
 import { Manager } from "@fire/lib/Manager";
 import { constants } from "@fire/lib/util/constants";
 import { getCommitHash } from "@fire/lib/util/gitUtils";
-import * as sentry from "@sentry/node";
+import sentry from "@sentry/node";
 
 const {
   regexes: {

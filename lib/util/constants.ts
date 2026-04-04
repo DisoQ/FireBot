@@ -1,5 +1,5 @@
 import { Chrono, Component as DateComponent } from "chrono-node";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import {
   BaseMessageComponentOptions,
   MessageActionRow,

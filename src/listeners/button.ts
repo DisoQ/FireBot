@@ -11,7 +11,7 @@ import { Listener } from "@fire/lib/util/listener";
 import { Message } from "@fire/lib/ws/Message";
 import { MessageUtil } from "@fire/lib/ws/util/MessageUtil";
 import { EventType } from "@fire/lib/ws/util/constants";
-import * as centra from "centra";
+import centra from "centra";
 import { Snowflake } from "discord-api-types/globals";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import {

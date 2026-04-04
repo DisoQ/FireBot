@@ -10,7 +10,7 @@ import {
   snowflakeConverter,
 } from "@fire/lib/util/converters";
 import { Language, LanguageKeys } from "@fire/lib/util/language";
-import * as centra from "centra";
+import centra from "centra";
 import {
   Formatters,
   GuildPreview,

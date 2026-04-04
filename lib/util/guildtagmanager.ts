@@ -6,7 +6,7 @@ import Embed from "@fire/src/commands/Utilities/embed";
 import { Snowflake } from "discord-api-types/globals";
 import { APIApplicationCommand } from "discord-api-types/v9";
 import { DiscordAPIError, LimitedCollection } from "discord.js";
-import * as fuzz from "fuzzball";
+import fuzz from "fuzzball";
 
 const slashCommandNameRegex =
     /^[-_\p{L}\p{N}\p{Script=Devanagari}\p{Script=Thai}]{1,32}$/gmu,

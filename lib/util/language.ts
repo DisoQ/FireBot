@@ -1,5 +1,5 @@
 import { fire } from "@fire/config/fire";
-import * as enUS from "@fire/i18n/en-US.json";
+import enUS from "@fire/i18n/en-US.json";
 import { Fire } from "@fire/lib/Fire";
 import { AkairoHandler, AkairoModule } from "discord-akairo";
 import { TOptions } from "i18next";

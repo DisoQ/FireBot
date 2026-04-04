@@ -1,6 +1,6 @@
 import { Manager } from "@fire/lib/Manager";
 import { Collection } from "discord.js";
-import * as Client from "ws";
+import Client from "ws";
 import { Message } from "./Message";
 import { MessageUtil } from "./util/MessageUtil";
 import { EventType } from "./util/constants";

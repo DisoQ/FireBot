@@ -1,4 +1,4 @@
-import * as sanitizer from "@aero/sanitizer";
+import sanitizer from "@aero/sanitizer";
 import { Fire } from "@fire/lib/Fire";
 import { FireGuild } from "@fire/lib/extensions/guild";
 import { FireMember } from "@fire/lib/extensions/guildmember";
@@ -9,7 +9,7 @@ import { Channel, Video } from "@fire/lib/interfaces/youtube";
 import { Message } from "@fire/lib/ws/Message";
 import { MessageUtil } from "@fire/lib/ws/util/MessageUtil";
 import { EventType } from "@fire/lib/ws/util/constants";
-import * as centra from "centra";
+import centra from "centra";
 import { ClientUtil } from "discord-akairo";
 import { Snowflake } from "discord-api-types/globals";
 import { PermissionFlagsBits } from "discord-api-types/v9";
@@ -32,9 +32,9 @@ import {
   Webhook,
   version as djsver,
 } from "discord.js";
-import * as FormData from "form-data";
+import FormData from "form-data";
 import { cpus, totalmem } from "os";
-import * as pidusage from "pidusage";
+import pidusage from "pidusage";
 import { Readable } from "stream";
 import { ApplicationCommandMessage } from "../extensions/appcommandmessage";
 import {

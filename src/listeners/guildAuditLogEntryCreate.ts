@@ -9,7 +9,7 @@ import {
 } from "@fire/lib/util/constants";
 import { Listener } from "@fire/lib/util/listener";
 import { GuildLogManager } from "@fire/lib/util/logmanager";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import {
   Collection,

@@ -2,7 +2,7 @@ import { FireMessage } from "@fire/lib/extensions/message";
 import { Command } from "@fire/lib/util/command";
 import { constants } from "@fire/lib/util/constants";
 import { Language } from "@fire/lib/util/language";
-import * as centra from "centra";
+import centra from "centra";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import { DiscordAPIError, GuildEmoji } from "discord.js";
 

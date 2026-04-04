@@ -1,5 +1,5 @@
 import { AsyncQueue } from "@sapphire/async-queue";
-import * as centra from "centra";
+import centra from "centra";
 import { Constants, DiscordAPIError, HTTPError } from "discord.js";
 import { constants } from "../util/constants";
 import { APIRequest } from "./APIRequest";

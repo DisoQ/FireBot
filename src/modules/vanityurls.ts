@@ -9,7 +9,7 @@ import { GuildSettings } from "@fire/lib/util/settings";
 import { Message } from "@fire/lib/ws/Message";
 import { MessageUtil } from "@fire/lib/ws/util/MessageUtil";
 import { EventType } from "@fire/lib/ws/util/constants";
-import * as centra from "centra";
+import centra from "centra";
 import { Snowflake } from "discord-api-types/globals";
 import { Invite, MessageEmbed } from "discord.js";
 

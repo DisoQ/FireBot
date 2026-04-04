@@ -10,7 +10,7 @@ import {
   shortURLs,
 } from "@fire/lib/util/constants";
 import { Module } from "@fire/lib/util/module";
-import * as centra from "centra";
+import centra from "centra";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import {
   CategoryChannel,

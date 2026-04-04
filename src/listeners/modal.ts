@@ -8,7 +8,7 @@ import { Listener } from "@fire/lib/util/listener";
 import { Message } from "@fire/lib/ws/Message";
 import { EventType } from "@fire/lib/ws/util/constants";
 import { MessageUtil } from "@fire/lib/ws/util/MessageUtil";
-import * as centra from "centra";
+import centra from "centra";
 import { casual } from "chrono-node";
 import { Snowflake } from "discord-api-types/globals";
 import {

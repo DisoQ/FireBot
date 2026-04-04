@@ -9,7 +9,7 @@ import { MembersSearchResult } from "@fire/lib/interfaces/members-search";
 import { Command } from "@fire/lib/util/command";
 import { constants, zws } from "@fire/lib/util/constants";
 import { Language } from "@fire/lib/util/language";
-import * as centra from "centra";
+import centra from "centra";
 import { Snowflake } from "discord-api-types/globals";
 import {
   APIApplication,

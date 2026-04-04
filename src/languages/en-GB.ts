@@ -1,4 +1,4 @@
-import * as language from "@fire/i18n/en-GB.json";
+import language from "@fire/i18n/en-GB.json";
 import { Language } from "@fire/lib/util/language";
 
 // Language#get falls back to en-US if the selected language

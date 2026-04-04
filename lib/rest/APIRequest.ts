@@ -1,6 +1,6 @@
 import { Fire } from "@fire/lib/Fire";
-import * as centra from "centra";
-import * as FormData from "form-data";
+import centra from "centra";
+import FormData from "form-data";
 import { RequestOptions } from "./APIRouter";
 import { RESTManager } from "./RESTManager";
 

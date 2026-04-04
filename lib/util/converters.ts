@@ -3,7 +3,7 @@ import { FireMember } from "@fire/lib/extensions/guildmember";
 import { FireMessage } from "@fire/lib/extensions/message";
 import { FireUser } from "@fire/lib/extensions/user";
 import Quote from "@fire/src/commands/Utilities/quote";
-import * as centra from "centra";
+import centra from "centra";
 import { Snowflake } from "discord-api-types/globals";
 import {
   CategoryChannel,
@@ -20,7 +20,7 @@ import {
   ThreadChannel,
   VoiceChannel,
 } from "discord.js";
-import * as fuzz from "fuzzball";
+import fuzz from "fuzzball";
 import { ApplicationCommandMessage } from "../extensions/appcommandmessage";
 import { FireTextChannel } from "../extensions/textchannel";
 import { constants } from "./constants";

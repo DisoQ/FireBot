@@ -6,7 +6,7 @@ import { humanFileSize, validPasteURLs } from "@fire/lib/util/clientutil";
 import { constants } from "@fire/lib/util/constants";
 import { Language } from "@fire/lib/util/language";
 import { Module } from "@fire/lib/util/module";
-import * as centra from "centra";
+import centra from "centra";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import {
   DiscordAPIError,

@@ -4,7 +4,7 @@ import { ContextCommandMessage } from "@fire/lib/extensions/contextcommandmessag
 import { FireMessage } from "@fire/lib/extensions/message";
 import { ModalMessage } from "@fire/lib/extensions/modalmessage";
 import { ParsedResult, casual } from "chrono-node";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import { ArgumentTypeCaster } from "discord-akairo";
 
 casual.parsers.push({

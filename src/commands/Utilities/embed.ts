@@ -14,7 +14,7 @@ import {
   ModalActionRowComponent,
   TextInputComponent,
 } from "discord.js";
-import * as tinycolor from "tinycolor2";
+import tinycolor from "tinycolor2";
 
 interface EmbedData {
   id: string;

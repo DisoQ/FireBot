@@ -39,7 +39,7 @@ import { userMemberTypeCaster } from "@fire/src/arguments/userMember";
 import { userMemberSnowflakeTypeCaster } from "@fire/src/arguments/userMemberSnowflake";
 import GuildUnavailable from "@fire/src/listeners/guildUnavailable";
 import AetherStats from "@fire/src/modules/aetherstats";
-import * as Sentry from "@sentry/node";
+import Sentry from "@sentry/node";
 import { VellumManager } from "@vellum-flags/sdk-node";
 import {
   AkairoClient,
@@ -63,7 +63,7 @@ import {
   version as djsver,
 } from "discord.js";
 import { ratio } from "fuzzball";
-import * as i18next from "i18next";
+import i18next from "i18next";
 import { Client as PGClient, SSLMode, connect } from "ts-postgres";
 import { Manager } from "./Manager";
 import { ApplicationCommandMessage } from "./extensions/appcommandmessage";
@@ -85,8 +85,6 @@ import { Module, ModuleHandler } from "./util/module";
 import { Message } from "./ws/Message";
 import { MessageUtil } from "./ws/util/MessageUtil";
 import { EventType } from "./ws/util/constants";
-// this shit has some weird import fuckery, this is the only way I can use it
-const i18n = i18next as unknown as typeof i18next.default;
 
 type ButtonHandler = (button: ComponentMessage) => Promise<any> | any;
 type ModalHandler = (modal: ModalMessage) => Promise<any> | any;
@@ -101,7 +99,7 @@ export class Fire extends AkairoClient {
   restPing: number;
 
   // i18n
-  i18n: typeof i18n;
+  i18n: typeof i18next;
 
   // Sharding
   manager: Manager;
@@ -166,7 +164,7 @@ export class Fire extends AkairoClient {
     this.setInterval = setInterval;
     this.setTimeout = setTimeout;
 
-    this.i18n = i18n;
+    this.i18n = i18next;
 
     // @ts-ignore
     this.rest = new RESTManager(this);

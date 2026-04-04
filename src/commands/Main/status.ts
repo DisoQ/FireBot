@@ -3,7 +3,7 @@ import { Components, Summary } from "@fire/lib/interfaces/instatus";
 import { Command } from "@fire/lib/util/command";
 import { constants, titleCase } from "@fire/lib/util/constants";
 import { Language } from "@fire/lib/util/language";
-import * as centra from "centra";
+import centra from "centra";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import { MessageEmbed } from "discord.js";
 
