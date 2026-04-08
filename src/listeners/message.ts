@@ -45,48 +45,6 @@ const safeDecodeURIComponent = (encodedURIComponent: string) => {
   }
 };
 
-const babyMobEmojis = [
-  "1486015710894231702",
-  "1486015734877257890",
-  "1486015765495939183",
-  "1486015787712909423",
-  "1486015810563608686",
-  "1486015837239509174",
-  "1486015860794720266",
-  "1486015900862906549",
-  "1486015926221672500",
-  "1486015950582190220",
-  "1486015974455906415",
-  "1486016018139578458",
-  "1486016043590615181",
-  "1486016067439689729",
-  "1486016088159293470",
-  "1486016108304666714",
-  "1486016129041170702",
-  "1486016147789840434",
-  "1486016164604678314",
-  "1486016184745852988",
-  "1486016206916943872",
-  "1486016228186128384",
-  "1486016247178068028",
-  "1486016268921208884",
-  "1486016299611197582",
-  "1486016321434026076",
-  "1486016346696454318",
-  "1486016367403733183",
-  "1486016393467134124",
-  "1486016414484664390",
-  "1486016437272182784",
-  "1486016470243610634",
-  "1486016494708981860",
-  "1486016516850847935",
-  "1486016535096066098",
-  "1486016557812547615",
-  "1486016580063330376",
-  "1486016598581051544",
-  "1486016617623191624",
-];
-
 export default class Message extends Listener {
   recentTokens: string[];
   tokenRegex: RegExp;
@@ -131,16 +89,11 @@ export default class Message extends Listener {
     )
       return await message.delete().catch(() => {});
     else if (
-      message.channelId == "1486403295684853882" &&
-      message.guild?.settings.get<boolean>("tinytakeover.delete", false)
-    ) {
-      const emojis = message.content.matchAll(regexes.customEmoji);
-      if (
-        !Array.from(emojis).length ||
-        !emojis.every((match) => babyMobEmojis.includes(match.groups?.id))
-      )
-        return await message.delete().catch(() => {});
-    }
+      message.member.roles.cache.has("886669291439656970") &&
+      (message.attachments.size || message.embeds.length) &&
+      !message.member.isModerator()
+    )
+      return await message.delete().catch(() => {});
 
     const autoroleId = message.guild.settings.get<Snowflake>(
       "mod.autorole",
