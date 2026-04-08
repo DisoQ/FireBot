@@ -5,6 +5,7 @@ import { Listener } from "@fire/lib/util/listener";
 import Filters from "@fire/src/modules/filters";
 import MCLogs from "@fire/src/modules/mclogs";
 import { Snowflake } from "discord-api-types/globals";
+import { GuildChannel } from "discord.js";
 
 const { regexes } = constants;
 
@@ -91,6 +92,12 @@ export default class Message extends Listener {
     else if (
       message.member.roles.cache.has("886669291439656970") &&
       (message.attachments.size || message.embeds.length) &&
+      !message.member.isModerator()
+    )
+      return await message.delete().catch(() => {});
+    else if (
+      (message.channel as GuildChannel)?.parentId == "1461699446483062928" &&
+      message.member.roles.cache.has("1209102992716992543") &&
       !message.member.isModerator()
     )
       return await message.delete().catch(() => {});
