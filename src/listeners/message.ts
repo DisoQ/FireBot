@@ -1,4 +1,4 @@
-import { FireMessage } from "@fire/lib/extensions/message";
+import { FireMessage, isMediaAttachment } from "@fire/lib/extensions/message";
 import { FireTextChannel } from "@fire/lib/extensions/textchannel";
 import { constants } from "@fire/lib/util/constants";
 import { Listener } from "@fire/lib/util/listener";
@@ -86,6 +86,13 @@ export default class Message extends Listener {
       (message.channel as FireTextChannel).parentId != "1033867272260943893" &&
       (message.channel as FireTextChannel).parentId != "1033869240274526311" &&
       (message.channel as FireTextChannel).parentId != "1033869280938307625" &&
+      !message.member.isModerator()
+    )
+      return await message.delete().catch(() => {});
+    else if (
+      message.guildId == "864592657572560958" &&
+      message.attachments.size == 4 &&
+      message.attachments.every(isMediaAttachment) &&
       !message.member.isModerator()
     )
       return await message.delete().catch(() => {});

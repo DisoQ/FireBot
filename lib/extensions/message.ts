@@ -63,7 +63,7 @@ const { regexes, imageExts, audioExts, videoExts } = constants;
 
 const EIGHT_MIB = 8_388_608;
 
-const isMediaAttachment = (attachment: MessageAttachment) =>
+export const isMediaAttachment = (attachment: MessageAttachment) =>
   attachment.contentType?.startsWith("image/") ||
   attachment.contentType?.startsWith("video/");
 
