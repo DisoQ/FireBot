@@ -1349,7 +1349,8 @@ export default class Modal extends Listener {
           }
           case ComponentType.FileUpload: {
             const sizeLimit = 8 * 1024 * 1024;
-            for (const attachment of data.attachments.values()) {
+            const attachments = modal.getUploadedFiles(data.customId);
+            for (const attachment of attachments.values()) {
               if (attachment.size > sizeLimit)
                 return await modal.error("APPEALS_SUBMIT_FILE_TOO_LARGE", {
                   filename: attachment.name,
