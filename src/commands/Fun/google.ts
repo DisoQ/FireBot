@@ -110,7 +110,7 @@ export default class Google extends Command {
         }>("SELECT uid FROM assistant WHERE uid = $1", [command.author.id])
         .first()
         .catch(() => ({ uid: "" }));
-      if (hasCredentials.uid && hasCredentials.uid != command.author.id)
+      if (hasCredentials?.uid && hasCredentials.uid != command.author.id)
         return await command.send("GOOGLE_CREDENTIAL_CHECK_FAILED");
       useDefaultCreds = !hasCredentials;
     }
