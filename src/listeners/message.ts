@@ -94,9 +94,22 @@ export default class Message extends Listener {
       message.attachments.size == 4 &&
       message.attachments.every(isMediaAttachment) &&
       !message.member.isModerator()
-    )
+    ) {
+      const alertsThread = await message.guild.channels
+        .fetch("1492219223475490987")
+        .catch(() => {});
+      // isThread gives type guard to ensure #forward doesn't complain
+      // since not all guild channels can be forwarded to
+      if (alertsThread && alertsThread.isThread()) {
+        await message.forward(alertsThread).catch(() => {});
+        await alertsThread
+          .send({
+            content: `Deleted message from ${message.author} (${message.author.id}) in ${message.channel} due to 4 media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
+          })
+          .catch(() => {});
+      }
       return await message.delete().catch(() => {});
-    else if (
+    } else if (
       message.member.roles.cache.has("886669291439656970") &&
       (message.attachments.size || message.embeds.length) &&
       !message.member.isModerator()
