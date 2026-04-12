@@ -40,7 +40,7 @@ importers:
         version: 0.38.38
       discord.js:
         specifier: github:FireDiscordBot/discord.js
-        version: https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/bb4dc046b56772106e4b8a5cb94058c5bca3b72f
+        version: https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/ee151faa32565874ceae980cc9e8e5017827cdce
       dotenv-extended:
         specifier: ^2.9.0
         version: 2.9.0
@@ -513,8 +513,8 @@ packages:
   discord-api-types@0.38.40:
     resolution: {integrity: sha512-P/His8cotqZgQqrt+hzrocp9L8RhQQz1GkrCnC9TMJ8Uw2q0tg8YyqJyGULxhXn/8kxHETN4IppmOv+P2m82lQ==}
 
-  discord.js@https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/bb4dc046b56772106e4b8a5cb94058c5bca3b72f:
-    resolution: {tarball: https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/bb4dc046b56772106e4b8a5cb94058c5bca3b72f}
+  discord.js@https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/ee151faa32565874ceae980cc9e8e5017827cdce:
+    resolution: {tarball: https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/ee151faa32565874ceae980cc9e8e5017827cdce}
     version: 13.18.7-fire
     engines: {node: '>=16.6.0', npm: '>=7.0.0'}
 
@@ -1295,7 +1295,7 @@ snapshots:
 
   discord-api-types@0.38.40: {}
 
-  discord.js@https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/bb4dc046b56772106e4b8a5cb94058c5bca3b72f:
+  discord.js@https://codeload.github.com/FireDiscordBot/discord.js/tar.gz/ee151faa32565874ceae980cc9e8e5017827cdce:
     dependencies:
       '@discordjs/builders': 0.16.0
       '@discordjs/collection': 0.7.0
