@@ -102,7 +102,10 @@ export default class Message extends Listener {
       // since not all guild channels can be forwarded to
       if (alertsThread && alertsThread.isThread()) {
         await message.forward(alertsThread).catch(() => {});
-        await alertsThread
+        // don't await so that we're not delaying the delete unnecessarily
+        // as this can be sent any time, it doesn't require the message to exist
+        // like forwarding does
+        alertsThread
           .send({
             content: `Deleted message from ${message.author} (${message.author.id}) in ${message.channel} due to 4 media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
           })
