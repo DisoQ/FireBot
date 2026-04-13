@@ -103,11 +103,11 @@ export default class Message extends Listener {
       !message.member.isModerator()
     ) {
       const alertsThread = await message.guild.channels
-        .fetch(fourMediaDeletionGuilds[message.guildId])
+        .fetch(fourMediaThreads[message.guildId])
         .catch(() => {});
       // isThread gives type guard to ensure #forward doesn't complain
       // since not all guild channels can be forwarded to
-      if (alertsThread && alertsThread.isThread()) {
+      if (alertsThread && alertsThread.isThread?.()) {
         const forwarded = await message.forward(alertsThread).catch(() => {});
         // don't await so that we're not delaying the delete unnecessarily
         // as this can be sent any time, it doesn't require the message to exist
