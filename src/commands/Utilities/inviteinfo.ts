@@ -29,13 +29,14 @@ export default class InviteInfo extends Command {
 
   async run(
     command: ApplicationCommandMessage,
-    args: { invite?: { match: string } }
+    args: { invite?: { match: RegExpMatchArray } }
   ) {
+    this.console.debug(args);
     if (!this.command)
       this.command = this.client.getCommand("guild") as GuildCommand;
     if (!args.invite?.match) return await command.error("INVITEINFO_NO_INVITE");
     const invite = (await this.client
-      .fetchInvite(args.invite.match)
+      .fetchInvite(args.invite.match[0])
       .catch((e) => e)) as InviteWithGuildCounts | Error;
     if (invite instanceof Error)
       return await command.error("INVITEINFO_INVALID");
