@@ -379,6 +379,7 @@ export default class CodeImage extends Command {
       if (!respond.author.settings.get<boolean>("utils.incognito", false))
         respond.flags = 0;
       const attach = new MessageAttachment(image.body, "code.png");
+      attach.setDescription(this.client.util.shortenText(code, 1024));
       return await respond.edit({ content: null, files: [attach] });
     }
   }
