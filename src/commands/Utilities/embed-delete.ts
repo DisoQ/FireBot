@@ -1,6 +1,7 @@
 import { ApplicationCommandMessage } from "@fire/lib/extensions/appcommandmessage";
 import { Command } from "@fire/lib/util/command";
 import { Language } from "@fire/lib/util/language";
+import { APIEmbed } from "discord-api-types/v9";
 import {
   ApplicationCommandOptionChoiceData,
   CommandInteractionOption,
@@ -40,11 +41,14 @@ export default class EmbedDelete extends Command {
     const embedIds = await this.client.db
       .query<{
         id: string;
-      }>("SELECT id FROM embeds WHERE uid=$1", [interaction.author.id])
+        embed: APIEmbed;
+      }>("SELECT id, embed FROM embeds WHERE uid=$1", [interaction.author.id])
       .catch(() => {});
     if (!embedIds) return [];
     return embedIds.rows.map((r) => ({
-      name: r[0],
+      name: r[1]?.title
+        ? this.client.util.shortenText(`${r[0]} - ${r[1].title}`, 100)
+        : r[0],
       value: r[0],
     })) as ApplicationCommandOptionChoiceData[];
   }
