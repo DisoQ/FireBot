@@ -46,6 +46,13 @@ const safeDecodeURIComponent = (encodedURIComponent: string) => {
   }
 };
 
+const fourMediaThreads = {
+  "864592657572560958": "1492219223475490987",
+  "564052798044504084": "1493297332102365274",
+  "807302538558308352": "1493300768768262318",
+};
+const fourMediaDeletionGuilds = Object.keys(fourMediaThreads);
+
 export default class Message extends Listener {
   recentTokens: string[];
   tokenRegex: RegExp;
@@ -90,13 +97,13 @@ export default class Message extends Listener {
     )
       return await message.delete().catch(() => {});
     else if (
-      message.guildId == "864592657572560958" &&
+      fourMediaDeletionGuilds.includes(message.guildId) &&
       message.attachments.size == 4 &&
       message.attachments.every(isMediaAttachment) &&
       !message.member.isModerator()
     ) {
       const alertsThread = await message.guild.channels
-        .fetch("1492219223475490987")
+        .fetch(fourMediaDeletionGuilds[message.guildId])
         .catch(() => {});
       // isThread gives type guard to ensure #forward doesn't complain
       // since not all guild channels can be forwarded to
@@ -107,7 +114,7 @@ export default class Message extends Listener {
         // like forwarding does
         alertsThread
           .send({
-            content: `Deleted [message](<${forwarded ? forwarded.url : "https://essential.gg/"}>) from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to 4 media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
+            content: `Deleted [message](<${forwarded ? forwarded.url : "https://getfire.bot/"}>) from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to 4 media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
             allowedMentions: {
               users: [message.author.id],
             },
