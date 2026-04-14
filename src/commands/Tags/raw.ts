@@ -54,7 +54,7 @@ export default class TagRaw extends Command {
       await message.guild.tags.init();
     }
     const manager = message.guild.tags;
-    const cachedTag = await manager.getTag(tag);
+    const cachedTag = await manager.getTag(tag, true, true);
     if (!cachedTag) return await message.error("TAG_INVALID_TAG", { tag });
     return await message.channel.send({
       content: await this.client.util.haste(
