@@ -61,10 +61,11 @@ export default class TagRaw extends Command {
         cachedTag.content,
         `${cachedTag.name}.md`,
         {
-          createdBy:
-            typeof cachedTag.createdBy == "string"
+          createdBy: cachedTag.createdBy
+            ? typeof cachedTag.createdBy == "string"
               ? cachedTag.createdBy
-              : cachedTag.createdBy.id,
+              : cachedTag.createdBy.id
+            : null,
           embedIds: cachedTag.embedIds,
           aliases: cachedTag.aliases,
         },
