@@ -130,7 +130,7 @@ export default class Message extends Listener {
         // like forwarding does
         alertsThread
           .send({
-            content: `Deleted [message](<${forwarded ? forwarded.url : "https://getfire.bot/"}>) from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to 4 media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
+            content: `Deleted ${forwarded ? `[message](${forwarded.url})` : "message"} from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to 4 media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
             allowedMentions: {
               users: [message.author.id],
             },
