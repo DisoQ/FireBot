@@ -115,10 +115,18 @@ export default class Message extends Listener {
       const alertsThread = await message.guild.channels
         .fetch(fourMediaThreads[message.guildId])
         .catch(() => {});
+      const deleteMessage = () =>
+        message.delete({ reason: "four media deletion" }).catch((e) => {
+          this.console.error(
+            `Failed to delete possible scam message in ${message.guild} (${message.guildId}) from author ${message.author} (${message.author.id})`,
+            e
+          );
+        });
       // isThread gives type guard to ensure #send doesn't complain
       // since not all guild channels can have messages
       if (alertsThread && alertsThread.isThread?.()) {
-        alertsThread
+        const deleteTimeout = setTimeout(deleteMessage, 10_000);
+        return await alertsThread
           .send({
             components: [
               new TextDisplayComponent({
@@ -141,16 +149,12 @@ export default class Message extends Listener {
               users: [message.author.id],
             },
           })
+          .then(() => {
+            clearTimeout(deleteTimeout);
+            deleteMessage();
+          })
           .catch(() => {});
-      }
-      return await message
-        .delete({ reason: "four media deletion" })
-        .catch((e) => {
-          this.console.error(
-            `Failed to delete possible scam message in ${message.guild} (${message.guildId}) from author ${message.author} (${message.author.id})`,
-            e
-          );
-        });
+      } else return await deleteMessage();
     } else if (
       message.member.roles.cache.has("886669291439656970") &&
       (message.attachments.size || message.embeds.length) &&
