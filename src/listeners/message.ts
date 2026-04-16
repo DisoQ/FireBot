@@ -124,7 +124,7 @@ export default class Message extends Listener {
               .catch(() => {});
             setTimeout(() => reject, 10_000);
           }
-        );
+        ).catch(() => {});
         // don't await so that we're not delaying the delete unnecessarily
         // as this can be sent any time, it doesn't require the message to exist
         // like forwarding does
