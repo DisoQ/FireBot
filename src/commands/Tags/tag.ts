@@ -72,7 +72,7 @@ export default class Tag extends Command {
         .catch(() => {});
     else
       return await message.channel.send({
-        content: cachedTag.content,
+        content: cachedTag.content || undefined,
         embeds: embeds.map((embed) => embed.embed),
       });
   }

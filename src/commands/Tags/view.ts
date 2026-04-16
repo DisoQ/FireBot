@@ -59,7 +59,7 @@ export default class TagView extends Command {
     const embeds = await manager.embedCommand.getEmbeds(cachedTag.embedIds);
 
     return await command.channel.send({
-      content: cachedTag.content || "",
+      content: cachedTag.content || undefined,
       embeds: embeds.map((embed) => embed.embed),
     });
   }
