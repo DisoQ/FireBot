@@ -98,9 +98,13 @@ export default class Message extends Listener {
       return await message.delete().catch(() => {});
     else if (
       fourMediaDeletionGuilds.includes(message.guildId) &&
-      message.attachments.size == 4 &&
+      (message.attachments.size == 4 ||
+        (message.attachments.size == 3 && !message.content)) &&
       message.attachments.every(isMediaAttachment) &&
-      !message.member.isModerator()
+      !message.member.isModerator() &&
+      !message.member.roles.cache.find(
+        (role) => role.name == "TEMP MEDIA PERMISSIONS"
+      )
     ) {
       const alertsThread = await message.guild.channels
         .fetch(fourMediaThreads[message.guildId])
