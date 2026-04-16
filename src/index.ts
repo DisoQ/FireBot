@@ -69,7 +69,8 @@ if (loadSentry) {
           "/webhooks/:id/:token"
         );
         return breadcrumb;
-      }
+      } else if (breadcrumb.data?.url?.includes("/api/vellum/sdk/config"))
+        return null;
 
       return breadcrumb;
     },
