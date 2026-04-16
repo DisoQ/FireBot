@@ -106,13 +106,25 @@ export default class Message extends Listener {
         (role) => role.name == "TEMP MEDIA PERMISSIONS"
       )
     ) {
+      this.console.warn(
+        `Found possible scam message in ${message.guild} (${message.guildId}) from author ${message.author} (${message.author.id}), attempting to forward to four media thread before deletion`
+      );
       const alertsThread = await message.guild.channels
         .fetch(fourMediaThreads[message.guildId])
         .catch(() => {});
       // isThread gives type guard to ensure #forward doesn't complain
       // since not all guild channels can be forwarded to
       if (alertsThread && alertsThread.isThread?.()) {
-        const forwarded = await message.forward(alertsThread).catch(() => {});
+        // limit wait time to 10s
+        const forwarded = await new Promise(
+          (resolve: (value: FireMessage) => void, reject) => {
+            message
+              .forward(alertsThread)
+              .then(resolve)
+              .catch(() => {});
+            setTimeout(() => reject, 10_000);
+          }
+        );
         // don't await so that we're not delaying the delete unnecessarily
         // as this can be sent any time, it doesn't require the message to exist
         // like forwarding does
@@ -125,7 +137,14 @@ export default class Message extends Listener {
           })
           .catch(() => {});
       }
-      return await message.delete().catch(() => {});
+      return await message
+        .delete({ reason: "four media deletion" })
+        .catch((e) => {
+          this.console.error(
+            `Failed to delete possible scam message in ${message.guild} (${message.guildId}) from author ${message.author} (${message.author.id})`,
+            e
+          );
+        });
     } else if (
       message.member.roles.cache.has("886669291439656970") &&
       (message.attachments.size || message.embeds.length) &&
