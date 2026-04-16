@@ -125,7 +125,9 @@ export default class Message extends Listener {
                 content: `Deleted message from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to ${message.attachments.size} media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
               }),
               new SeparatorComponent().setSpacing("SMALL").displayDivider(true),
-              new TextDisplayComponent({ content: message.content }),
+              message.content
+                ? new TextDisplayComponent({ content: message.content })
+                : undefined,
               new MediaGalleryComponent().addItems(
                 message.attachments.map((attach) =>
                   new MediaGalleryItem()
@@ -134,7 +136,7 @@ export default class Message extends Listener {
                     .setSpoiler(attach.spoiler)
                 )
               ),
-            ],
+            ].filter(Boolean),
             allowedMentions: {
               users: [message.author.id],
             },
