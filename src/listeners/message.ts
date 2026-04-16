@@ -5,7 +5,13 @@ import { Listener } from "@fire/lib/util/listener";
 import Filters from "@fire/src/modules/filters";
 import MCLogs from "@fire/src/modules/mclogs";
 import { Snowflake } from "discord-api-types/globals";
-import { GuildChannel } from "discord.js";
+import {
+  GuildChannel,
+  MediaGalleryComponent,
+  MediaGalleryItem,
+  SeparatorComponent,
+  TextDisplayComponent,
+} from "discord.js";
 
 const { regexes } = constants;
 
@@ -106,31 +112,29 @@ export default class Message extends Listener {
         (role) => role.name == "TEMP MEDIA PERMISSIONS"
       )
     ) {
-      this.console.warn(
-        `Found possible scam message in ${message.guild} (${message.guildId}) from author ${message.author} (${message.author.id}), attempting to forward to four media thread before deletion`
-      );
       const alertsThread = await message.guild.channels
         .fetch(fourMediaThreads[message.guildId])
         .catch(() => {});
-      // isThread gives type guard to ensure #forward doesn't complain
-      // since not all guild channels can be forwarded to
+      // isThread gives type guard to ensure #send doesn't complain
+      // since not all guild channels can have messages
       if (alertsThread && alertsThread.isThread?.()) {
-        // limit wait time to 10s
-        const forwarded = await new Promise(
-          (resolve: (value: FireMessage) => void, reject) => {
-            message
-              .forward(alertsThread)
-              .then(resolve)
-              .catch(() => {});
-            setTimeout(() => reject, 10_000);
-          }
-        ).catch(() => {});
-        // don't await so that we're not delaying the delete unnecessarily
-        // as this can be sent any time, it doesn't require the message to exist
-        // like forwarding does
         alertsThread
           .send({
-            content: `Deleted ${forwarded ? `[message](${forwarded.url})` : "message"} from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to 4 media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
+            components: [
+              new TextDisplayComponent({
+                content: `Deleted message from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to ${message.attachments.size} media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
+              }),
+              new SeparatorComponent().setSpacing("SMALL").displayDivider(true),
+              new TextDisplayComponent({ content: message.content }),
+              new MediaGalleryComponent().addItems(
+                message.attachments.map((attach) =>
+                  new MediaGalleryItem()
+                    .setMedia(attach.url)
+                    .setDescription(attach.description)
+                    .setSpoiler(attach.spoiler)
+                )
+              ),
+            ],
             allowedMentions: {
               users: [message.author.id],
             },
