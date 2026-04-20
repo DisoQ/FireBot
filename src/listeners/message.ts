@@ -130,7 +130,7 @@ export default class Message extends Listener {
           .send({
             components: [
               new TextDisplayComponent({
-                content: `Deleted message from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to ${message.attachments.size} media attachments (${message.attachments.map((a) => a.name).join(", ")})`,
+                content: `Deleted message from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to ${message.attachments.size} media attachments (${message.attachments.map((a) => a.name).join(", ")}) with thumbhashes ${message.attachments.map((attach) => attach.placeholder).join(", ")}`,
               }),
               new SeparatorComponent().setSpacing("SMALL").displayDivider(true),
               message.content
