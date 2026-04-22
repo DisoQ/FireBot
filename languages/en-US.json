@@ -1703,6 +1703,7 @@
   "ROLEPERSIST_ROLE_INVALID": "I am unable to persist this role. It must be lower than my top role & your top role, not managed & not the everyone role",
   "ROLEPERSIST_SELF": "You cannot persist roles to yourself!",
   "ROLEPERSIST_GOD": "You cannot persist roles to someone higher than yourself",
+  "ROLEPERSIST_ALREADY": "That role has already been persisted to that user!",
   "ROLEPERSIST_LOG_AUTHOR": "Role Persist | {{member}}",
   "ROLEPERSIST_SUCCESS": "Success! {{member}} now has the role(s) {{roles}} persisted to them. Removing a persisted role will unpersist it",
   "ROLEPERSIST_REMOVED": "{{member}} no longer has any roles persisted to them.",
