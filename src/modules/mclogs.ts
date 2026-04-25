@@ -10,6 +10,7 @@ import centra from "centra";
 import { PermissionFlagsBits } from "discord-api-types/v9";
 import {
   DiscordAPIError,
+  DMChannel,
   MessageActionRow,
   MessageButton,
   MessageEmbed,
@@ -387,7 +388,22 @@ export default class MCLogs extends Module {
       if ("error" in mclogsRes) {
         const e = new Error(mclogsRes.error);
         this.console.debug("Failed to process log\n", e.stack);
-        this.client.sentry?.captureException(e);
+        this.client.sentry?.captureException(e, {
+          extra: {
+            url: rawURL.toString(),
+            "message.id": message.id,
+            "guild.id": message.guildId,
+            "source.name": message.source,
+            "source.shard": message.shard,
+            "channel.id": message.channel?.id || "0",
+            "channel.name":
+              (message.channel instanceof DMChannel
+                ? message.channel.recipient?.toString()
+                : message.channel?.name) || "Unknown",
+            env: process.env.NODE_ENV,
+          },
+          user: { id: message.author.id, username: message.author.toString() },
+        });
       } else if ("logType" in mclogsRes) {
         try {
           await this.handleLogRes(
