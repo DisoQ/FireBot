@@ -1480,6 +1480,7 @@
   "QUOTE_AUTOMOD_SCENARIOS": {
     "clan_tag_update": "**AutoMod** quarantined a member at tag adoption",
     "username_update": "**AutoMod** quarantined a member at username update",
+    "message_send": "**AutoMod** quarantined a member at message send",
     "guild_join": "**AutoMod** quarantined a member at server join",
     "message": "**AutoMod** blocked a message in {{channel}}"
   },
