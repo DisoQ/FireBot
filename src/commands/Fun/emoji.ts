@@ -15,9 +15,11 @@ export default class Emoji extends Command {
         language.get("EMOJI_COMMAND_DESCRIPTION"),
       clientPermissions: [
         PermissionFlagsBits.SendMessages,
-        PermissionFlagsBits.ManageGuildExpressions,
+        PermissionFlagsBits.CreateGuildExpressions,
       ],
-      userPermissions: [PermissionFlagsBits.ManageGuildExpressions],
+      // since we want to allow either manage or create
+      // we can't specify permissions here as we can't do one or the other
+      // userPermissions: [PermissionFlagsBits.ManageGuildExpressions],
       args: [
         {
           id: "name",
@@ -46,6 +48,19 @@ export default class Emoji extends Command {
     message: FireMessage,
     args: { name?: { match?: RegExpMatchArray }; emoji?: string }
   ) {
+    if (
+      !message.member.permissions.has(
+        PermissionFlagsBits.ManageGuildExpressions
+      ) &&
+      !message.member.permissions.has(
+        PermissionFlagsBits.CreateGuildExpressions
+      )
+    )
+      return await message.error("MISSING_PERMISSIONS_USER", {
+        permissions: `${this.client.util.cleanPermissionName(PermissionFlagsBits.CreateGuildExpressions)} / ${this.client.util.cleanPermissionName(PermissionFlagsBits.ManageGuildExpressions)}`,
+        command: "emoji",
+      });
+
     let emoji = args.emoji || message.attachments.first()?.url;
     let name = args.name?.match?.[0] || "stolen_emoji";
 
