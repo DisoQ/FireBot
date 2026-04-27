@@ -44,10 +44,10 @@ export default class Emoji extends Command {
 
   async exec(
     message: FireMessage,
-    args: { name?: { match?: string }; emoji?: string }
+    args: { name?: { match?: RegExpMatchArray }; emoji?: string }
   ) {
     let emoji = args.emoji || message.attachments.first()?.url;
-    let name = args.name?.match || "stolen_emoji";
+    let name = args.name?.match?.[0] || "stolen_emoji";
 
     // smol checks on the arguments to ensure they're valid
     if (!emoji) return await message.error("EMOJI_INVALID");
