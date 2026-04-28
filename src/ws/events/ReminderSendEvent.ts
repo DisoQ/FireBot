@@ -25,6 +25,7 @@ enum REMINDER_FAILURE_CAUSES {
   UNKNOWN,
   DISCORD_API_ERROR_UNKNOWN,
   DMS_CLOSED,
+  NO_MUTUAL_GUILDS,
 }
 
 // Aether keeps track of the amount of times it tried to send a reminder
@@ -151,6 +152,8 @@ export default class ReminderSend extends Event {
           opcode: number = e instanceof DiscordAPIError ? e.code : 0;
         if (e instanceof DiscordAPIError && e.code == 50007)
           cause = REMINDER_FAILURE_CAUSES.DMS_CLOSED;
+        else if (e instanceof DiscordAPIError && e.code == 50278)
+          cause = REMINDER_FAILURE_CAUSES.NO_MUTUAL_GUILDS;
         else if (e instanceof DiscordAPIError) {
           cause = REMINDER_FAILURE_CAUSES.DISCORD_API_ERROR_UNKNOWN;
           if (e.code == 50001)
