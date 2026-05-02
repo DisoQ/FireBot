@@ -3366,6 +3366,15 @@ The lack of this is a sign that this message may have been sent automatically by
     //   lowerContent.includes(".exe")
     // )
     //   return await triggerFilter("Try my game scam");
+    else if (
+      this.embeds.some(
+        (embed) =>
+          embed.title.includes("Mr. Beast") &&
+          embed.description.includes("$") &&
+          embed.description.includes("promo")
+      )
+    )
+      return await triggerFilter("Mr. Beast Scam Link");
     // always keep this last
     else if (
       sanitized.includes("http") &&
