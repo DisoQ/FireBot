@@ -256,7 +256,7 @@ export default class GuildMemberAdd extends Listener {
         .join(", ");
       if (roles && roles.length <= 1024)
         embed.addFields({ name: language.get("ROLES"), value: roles });
-      if (member.guild.mutes.has(member.id))
+      if (member.guild.mutes.get(member.id))
         embed.addFields({
           name: member.guild.language.get("MUTE_WILL_BE_UNMUTED"),
           value: Formatters.time(
