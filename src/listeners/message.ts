@@ -107,7 +107,9 @@ export default class Message extends Listener {
     else if (
       fourMediaDeletionGuilds.includes(message.guildId) &&
       (message.attachments.size == 4 ||
-        (message.attachments.size == 3 && !message.content)) &&
+        (message.attachments.size == 3 &&
+          (!message.content ||
+            message.content.trim().toLowerCase() == "bro"))) &&
       message.attachments.every(isMediaAttachment) &&
       !message.member.isModerator() &&
       !message.member.roles.cache.find(
