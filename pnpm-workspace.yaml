@@ -1,2 +1,4 @@
 onlyBuiltDependencies:
   - discord.js
+allowBuilds:
+  discord.js: true
