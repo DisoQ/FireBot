@@ -927,6 +927,8 @@
   "EMOJI_INVALID": "You must provide an emoji to upload. This can be an existing emoji, emoji URL or an attached image.",
   "EMOJI_NAME_LONG": "The emoji name must be less than 32 characters!",
   "EMOJI_NAME_SHORT": "The emoji name must be at least 2 characters!",
+  "EMOJI_MAXIMUM_UPLOADED": "This server has reached the maximum number of static emojis",
+  "EMOJI_MAXIMUM_UPLOADED_ANIMATED": "This server has reached the maximum number of animated emojis",
   "EMOJI_ERROR": "Something went wrong while uploading that emoji. (Error code: {{code}})",
   "EMOJI_UPLOADED": "The emoji {{emoji}} was successfully added to this server!",
   "EMOJILOCK_INVALID_EMOJI": "You must provide a valid emoji from this server to lock",

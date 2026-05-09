@@ -109,6 +109,13 @@ export default class Emoji extends Command {
     try {
       created = await message.guild.emojis.create(emoji, name);
     } catch (e) {
+      if (e instanceof DiscordAPIError && (e.code == 30008 || e.code == 30018))
+        return await message.error(
+          e.code == 30008
+            ? "EMOJI_MAXIMUM_UPLOADED"
+            : "EMOJI_MAXIMUM_UPLOADED_ANIMATED"
+        );
+
       return await message.error("EMOJI_ERROR", {
         code: e instanceof DiscordAPIError ? e.code : 0,
       });
