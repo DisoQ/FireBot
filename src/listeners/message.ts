@@ -114,7 +114,9 @@ export default class Message extends Listener {
       !message.member.isModerator() &&
       !message.member.roles.cache.find(
         (role) => role.name == "TEMP MEDIA PERMISSIONS"
-      )
+      ) &&
+      // avoid deleting intial message in forums
+      !(message.channel.isThread() && message.id == message.channelId)
     ) {
       const alertsThread = await message.guild.channels
         .fetch(fourMediaThreads[message.guildId])
@@ -134,7 +136,7 @@ export default class Message extends Listener {
           .send({
             components: [
               new TextDisplayComponent({
-                content: `Deleted message from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to ${message.attachments.size} media attachments (${message.attachments.map((a) => a.name).join(", ")}) with thumbhashes ${message.attachments.map((attach) => attach.placeholder).join(", ")}`,
+                content: `Deleted message from ${message.author.toMention()} (${message.author.id}) in ${message.channel} due to ${message.attachments.size} media attachments\n${message.attachments.map((a) => a.name).join(", ")}`,
               }),
               new SeparatorComponent().setSpacing("SMALL").displayDivider(true),
               message.content
@@ -143,7 +145,7 @@ export default class Message extends Listener {
               new MediaGalleryComponent().addItems(
                 message.attachments.map((attach) =>
                   new MediaGalleryItem()
-                    .setMedia(attach.url)
+                    .setMedia(attach.proxyURL)
                     .setDescription(attach.description)
                     .setSpoiler(attach.spoiler)
                 )
