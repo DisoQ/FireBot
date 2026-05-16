@@ -525,7 +525,11 @@ export class Util extends ClientUtil {
   }
 
   suppressMaskedLinks(text: string) {
-    return text.replace(regexes.maskedLink, "[$<name>](<$<link>>)");
+    return text.replace(
+      regexes.maskedLink,
+      (_, name: string, link: string) =>
+        `[${name}](${link.startsWith("<") && link.endsWith(">") ? link : `<${link}>`})`
+    );
   }
 
   supressLinks(text: string) {
