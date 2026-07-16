@@ -66,16 +66,18 @@ export default class RedirectCreate extends Command {
 
     if (!destination) return await command.error("REDIRECT_CREATE_URL_INVALID");
 
-    const request = await centra(destination)
-      .header("User-Agent", this.client.manager.browserua)
-      .send();
-    let location: URL;
-    try {
-      location = new URL(request.headers.location ?? request.coreRes.url);
-      if (!command.author.isSuperuser()) this.checkURL(location);
-    } catch (e) {
-      // location won't be set if the URL is invalid
-      if (location) return await command.error("REDIRECT_CREATE_URL_INVALID");
+    if (destination.protocol == "https:") {
+      const request = await centra(destination)
+        .header("User-Agent", this.client.manager.browserua)
+        .send();
+      let location: URL;
+      try {
+        location = new URL(request.headers.location ?? request.coreRes.url);
+        if (!command.author.isSuperuser()) this.checkURL(location);
+      } catch (e) {
+        // location won't be set if the URL is invalid
+        if (location) return await command.error("REDIRECT_CREATE_URL_INVALID");
+      }
     }
 
     const created = await this.module.create(
