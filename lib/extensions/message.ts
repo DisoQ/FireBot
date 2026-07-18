@@ -85,7 +85,7 @@ export class FireMessage extends Message {
     | StageChannel
     | VoiceChannel;
   invWtfResolved: Collection<string, { invite?: string; url?: string }>;
-  savedQuoteData: { nsfw: boolean; name: string };
+  savedQuoteData: { nsfw: boolean; name: string; guildId: Snowflake };
   declare member: FireMember;
   savedToQuoteBy: Snowflake;
   declare guild: FireGuild;

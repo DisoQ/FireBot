@@ -240,7 +240,7 @@ export default class Quote extends Command {
     debug?: string[]
   ) {
     const args = {
-      message: `${message.guildId ?? "@me"}/${message.channelId}/${message.id}`,
+      message: `${message.isSavedToQuote ? message.savedQuoteData.guildId : (message.guildId ?? "@me")}/${message.channelId}/${message.id}`,
     };
     this.client.commandHandler.emit(
       CommandHandlerEvents.COMMAND_STARTED,
@@ -360,6 +360,7 @@ export default class Quote extends Command {
     messageToSave.savedQuoteData = {
       nsfw: "nsfw" in rawChannel ? rawChannel.nsfw : false,
       name: "name" in rawChannel ? rawChannel.name : "Unknown",
+      guildId: command.guildId,
     };
 
     this.savedQuotes.set(
