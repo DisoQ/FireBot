@@ -777,6 +777,7 @@ export const shortURLs = [
   "spedr.com",
   "srnk.net",
   "srs.li",
+  "srturl.link",
   "starturl.com",
   "su.pr",
   "surl.co.uk",
